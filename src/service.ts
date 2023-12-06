@@ -36,5 +36,25 @@ export class Service {
             console.log(`Deposit of ${toDeposit} successful. New balance: ${updatedMoney}`);
         }
     }
+
+    
+    public withDrawMoney(toWithdraw: number, username: string): void {
+        const wallet = this.findWalletByUserUsername(username);
+    
+        if (!wallet) {
+            console.log("Wallet not found for the given username");
+            return;
+        }
+        
+        const actualMoney = wallet.getMoney();
+    
+        if (actualMoney < toWithdraw) {
+            console.log("You can only retire a value inferior to your money");
+        } else {
+            const updatedMoney = wallet.getMoney() - toWithdraw;
+            wallet.setMoney(updatedMoney);
+            console.log(`Deposit of ${toWithdraw} successful. New balance: ${updatedMoney}`);
+        }
+    }
     
 }
