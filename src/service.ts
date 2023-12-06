@@ -1,7 +1,10 @@
 import { Data } from "./data";
-import { User, Wallet } from "./Model";
+import { User, Wallet } from "./model";
 
-class Service {
+export class Service {
+    constructor() {
+        
+    }
     data: Data = new Data();
 
     public findUserByUsername(username: string): User | undefined {

@@ -1,4 +1,4 @@
-import { User, Wallet } from "./Model";
+import { User, Wallet } from "./model";
 
 export class Data {
     constructor(){
