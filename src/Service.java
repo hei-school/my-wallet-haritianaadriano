@@ -46,6 +46,14 @@ public class Service {
     return true;
   }
 
+  public boolean borrow(String username, int toBorrow) {
+    Wallet wallet = findWalletByUserUsername(username);
+    int actualMoney = wallet.getMoney();
+    wallet.setMoney(actualMoney - toBorrow);
+    System.out.println("actual balance: " + wallet.getMoney());
+    return true;
+  }
+
   public boolean withdraw(String username, int toWithdraw) {
     Wallet wallet = findWalletByUserUsername(username);
     if (toWithdraw > wallet.getMoney()) {

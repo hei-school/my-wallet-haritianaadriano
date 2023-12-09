@@ -44,7 +44,21 @@ public class Main {
         if (choice == 2) {
           System.out.println("enter the value to withdraw: ");
           int toWithDraw = scanner.nextInt();
-          service.withdraw(usernmane, toWithDraw);
+
+          if (!service.withdraw(usernmane, toWithDraw)) {
+            System.out.println("\nborrow ? ");
+            boolean response = scanner.nextBoolean();
+            if (response) {
+              System.out.println("\n--------------------------------------");
+              System.out.println("\n(WARNING ! (be careful, this means you'll be in debt if you don't have enough money.)");
+              boolean borrow = scanner.nextBoolean();
+              if (borrow) {
+                System.out.println("enter a value to borrow: ");
+                int toBorrow = scanner.nextInt();
+                service.borrow(usernmane, toBorrow);
+              }
+            }
+          };
         }
         if (choice == 3) {
           System.out.println("thanks for session");
