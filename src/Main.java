@@ -33,9 +33,12 @@ public class Main {
 
         int choice = scanner.nextInt();
 
-        if (choice == 5) {
+        if (choice == 6) {
           System.out.println("thanks for session");
           break;
+        }
+        if (choice == 5) {
+          service.checkCard(usernmane);
         }
         if (choice == 3) {
           service.checkBalance(usernmane);

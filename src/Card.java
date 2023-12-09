@@ -6,6 +6,9 @@ public class Card {
     this.cardOwner = cardOwner;
     this.cardType = cardType;
   }
+  public CardType getCardType() {
+    return this.cardType;
+  }
   public static enum CardType {
     CIN,
     VISIT_CARD,

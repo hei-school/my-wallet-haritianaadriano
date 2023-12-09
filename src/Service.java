@@ -1,5 +1,6 @@
 import java.util.Optional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Service {
   private final Data data = new Data();
@@ -11,7 +12,8 @@ public class Service {
     System.out.println("\n2. withdraw");
     System.out.println("\n3. check balance");
     System.out.println("\n4. update wallet status");
-    System.out.println("\n5. exit");
+    System.out.println("\n5. check card");
+    System.out.println("\n6. exit");
   }
 
   public void updateWalletStatus(String username, Wallet.WalletStatus status) {
@@ -27,6 +29,13 @@ public class Service {
     }
     wallet.setStatus(status);
     System.out.println("actual status: " + wallet.getStatus());
+  }
+
+  public void checkCard(String username) {
+    Wallet wallet = findWalletByUserUsername(username);
+    List<Card.CardType> cardInWallet = wallet.getCards().stream().map(Card::getCardType).collect(
+        Collectors.toUnmodifiableList());
+    System.out.println("cards: " + cardInWallet);
   }
 
   public void checkBalance(String username) {
