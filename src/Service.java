@@ -1,4 +1,5 @@
 import java.util.Optional;
+import java.util.List;
 
 public class Service {
   private final Data data = new Data();
@@ -8,7 +9,29 @@ public class Service {
     System.out.println("choice: ");
     System.out.println("\n1. deposit");
     System.out.println("\n2. withdraw");
-    System.out.println("\n3. exit");
+    System.out.println("\n3. check balance");
+    System.out.println("\n4. update wallet status");
+    System.out.println("\n5. exit");
+  }
+
+  public void updateWalletStatus(String username, Wallet.WalletStatus status) {
+    Wallet wallet = findWalletByUserUsername(username);
+    if(status.equals(Wallet.WalletStatus.FORFEITED)) {
+      // because parent forfeited you
+      wallet.setMoney(0);
+    }
+    if(status.equals(Wallet.WalletStatus.ROBBED)) {
+      // because you has been robbed
+      wallet.setCards(List.of());
+      wallet.setMoney(0);
+    }
+    wallet.setStatus(status);
+    System.out.println("actual status: " + wallet.getStatus());
+  }
+
+  public void checkBalance(String username) {
+    Wallet wallet = findWalletByUserUsername(username);
+    System.out.println("actual balance: " + wallet.getMoney());
   }
 
   public User findUserByUsername(String username) {
@@ -50,6 +73,9 @@ public class Service {
     Wallet wallet = findWalletByUserUsername(username);
     int actualMoney = wallet.getMoney();
     wallet.setMoney(actualMoney - toBorrow);
+    if(wallet.getMoney() < 0) {
+      wallet.setStatus(Wallet.WalletStatus.INDEBTED);
+    }
     System.out.println("actual balance: " + wallet.getMoney());
     return true;
   }

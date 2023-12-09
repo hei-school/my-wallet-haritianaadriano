@@ -33,8 +33,24 @@ public class Main {
 
         int choice = scanner.nextInt();
 
-        if (choice == 3) {
+        if (choice == 5) {
+          System.out.println("thanks for session");
           break;
+        }
+        if (choice == 3) {
+          service.checkBalance(usernmane);
+        }
+        if (choice == 4) {
+          System.out.println("enter a new wallet status: ");
+          String statusInput = scanner.nextLine();
+          Wallet.WalletStatus walletStatus = null;
+          try {
+            walletStatus = Wallet.WalletStatus.valueOf(statusInput.toUpperCase());
+            service.updateWalletStatus(usernmane, walletStatus);
+          }
+          catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+          }
         }
         if (choice == 1) {
           System.out.println("enter the value to deposit: ");
@@ -59,10 +75,6 @@ public class Main {
               }
             }
           };
-        }
-        if (choice == 3) {
-          System.out.println("thanks for session");
-          break;
         }
       }
     }
