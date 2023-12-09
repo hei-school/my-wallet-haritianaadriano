@@ -1,11 +1,15 @@
 import { Data } from "./data";
-import { User, Wallet } from "./model";
+import { User, Wallet, WalletStatus } from "./model";
 
 export class Service {
     constructor() {
         
     }
     data: Data = new Data();
+
+    public updateWalletStatus(status: WalletStatus, username: string): void {
+        this.findWalletByUserUsername(username)?.setStatus(status);
+    }
 
     public findUserByUsername(username: string): User | undefined {
         return this.data.findUserData().find(user => user.getUsername() === username);
